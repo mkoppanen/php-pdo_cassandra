@@ -46,7 +46,7 @@ namespace rb CassandraThrift
 #           for every edit that doesn't result in a change to major/minor.
 #
 # See the Semantic Versioning Specification (SemVer) http://semver.org.
-const string VERSION = "19.17.0"
+const string VERSION = "19.19.0"
 
 
 #
@@ -342,6 +342,12 @@ struct Mutation {
     2: optional Deletion deletion,
 }
 
+struct EndpointDetails {
+    1: string host,
+    2: string datacenter,
+    3: optional string rack
+}
+
 /**
     A TokenRange describes part of the Cassandra ring, it is a mapping from a range to
     endpoints responsible for that range.
@@ -355,6 +361,7 @@ struct TokenRange {
     2: required string end_token,
     3: required list<string> endpoints,
     4: optional list<string> rpc_endpoints
+    5: optional list<EndpointDetails> endpoint_details,
 }
 
 /**
