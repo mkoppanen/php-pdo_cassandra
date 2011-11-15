@@ -17,9 +17,6 @@
 #ifndef _PHP_PDO_CASSANDRA_H_
 # define _PHP_PDO_CASSANDRA_H_
 
-#define PHP_PDO_CASSANDRA_EXTNAME "pdo_cassandra"
-#define PHP_PDO_CASSANDRA_EXTVER "@PACKAGE_VERSION@"
-
 extern "C" {
 #ifdef ZTS
 # include "TSRM.h"

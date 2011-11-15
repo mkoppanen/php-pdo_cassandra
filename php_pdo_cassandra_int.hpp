@@ -43,6 +43,7 @@ extern "C" {
 #undef HAVE_ZLIB
 
 #include "gen-cpp/Cassandra.h"
+#include "gen-cpp/cassandra_constants.h"
 #include <protocol/TBinaryProtocol.h>
 #include <transport/TSocketPool.h>
 #include <transport/TTransportUtils.h>
@@ -53,6 +54,9 @@ extern "C" {
 #include <boost/bimap.hpp>
 #include <iostream>
 #include <string>
+
+#define PHP_PDO_CASSANDRA_EXTNAME "pdo_cassandra"
+#define PHP_PDO_CASSANDRA_EXTVER g_cassandra_constants.VERSION.c_str()
 
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
