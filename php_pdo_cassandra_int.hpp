@@ -56,7 +56,8 @@ extern "C" {
 #include <string>
 
 #define PHP_PDO_CASSANDRA_EXTNAME "pdo_cassandra"
-#define PHP_PDO_CASSANDRA_EXTVER g_cassandra_constants.VERSION.c_str()
+#define PHP_PDO_CASSANDRA_EXTVER "@PACKAGE_VERSION@"
+#define PHP_PDO_CASSANDRA_THRIFTVER g_cassandra_constants.VERSION.c_str()
 
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
