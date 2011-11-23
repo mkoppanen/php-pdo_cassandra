@@ -88,6 +88,6 @@ if test "x${PHP_PDO_CASSANDRA}" != "xno"; then
   PHP_ADD_LIBRARY(stdc++, PDO_CASSANDRA_SHARED_LIBADD)
   PHP_SUBST(PDO_CASSANDRA_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(pdo_cassandra, cassandra_driver.cpp cassandra_statement.cpp gen-cpp/Cassandra.cpp gen-cpp/cassandra_types.cpp gen-cpp/cassandra_constants.cpp, $ext_shared,,-Wall -Wno-write-strings)
+  PHP_NEW_EXTENSION(pdo_cassandra, cassandra_driver.cpp cassandra_statement.cpp gen-cpp/Cassandra.cpp gen-cpp/cassandra_types.cpp, $ext_shared,,-Wall -Wno-write-strings)
 fi
 
