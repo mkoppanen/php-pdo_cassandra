@@ -656,7 +656,6 @@ PHP_MINFO_FUNCTION(pdo_cassandra)
 	php_info_print_table_start();
 	php_info_print_table_header(2, "PDO Driver for Cassandra", "enabled");
 	php_info_print_table_header(2, "PDO Driver for Cassandra version", PHP_PDO_CASSANDRA_EXTVER);
-	php_info_print_table_header(2, "PDO Driver for Cassandra thrift bindings version", PHP_PDO_CASSANDRA_THIRFTVER);
 	php_info_print_table_end();
 }
 /* }}} */

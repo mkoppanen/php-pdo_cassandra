@@ -25,6 +25,9 @@ extern "C" {
 #include "php.h"
 }
 
+#define PHP_PDO_CASSANDRA_EXTNAME "pdo_cassandra"
+#define PHP_PDO_CASSANDRA_EXTVER "@PACKAGE_VERSION@"
+
 extern zend_module_entry cassandra_module_entry;
 #define phpext_cassandra_ptr &cassandra_module_entry
 
