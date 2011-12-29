@@ -445,19 +445,41 @@ static long pdo_cassandra_handle_execute(pdo_dbh_t *dbh, const char *sql, long s
 */
 static int pdo_cassandra_handle_quote(pdo_dbh_t *dbh, const char *unquoted, int unquotedlen, char **quoted, int *quotedlen, enum pdo_param_type paramtype TSRMLS_DC)
 {
-	char *escaped;
-	int new_length;
+    switch (PDO_PARAM_TYPE(paramtype)) {
+        case PDO_PARAM_INT:
+            long lval;
+            double dval;
+            switch (is_numeric_string(unquoted, unquotedlen, &lval, &dval, 0)) {
+                case IS_LONG:
+                    *quoted = estrdup(unquoted);
+                    *quotedlen = unquotedlen;
+                    return 1;
+                case IS_DOUBLE:
+                default:
+                    return 0;
+            }
+            break;
+        case PDO_PARAM_BOOL:
+            // XXX: never called so far, because pdo treat PDO_PARAM_BOOL as PDO_PARAM_STR
+            // TODO: consider to handle PDO::PARAM_BOOL
+        case PDO_PARAM_STR:
+        default:
+            char *escaped;
+            int new_length;
+            int replace_count;
 
-	// const_cast should be fine here, php_addslashes shouldn't modify the data
-	escaped = php_addslashes(const_cast <char *>(unquoted), unquotedlen, &new_length, 0 TSRMLS_CC);
+            // const_cast should be fine here, php_str_to_str_ex shouldn't modify the data
+            escaped = php_str_to_str_ex(const_cast <char *>(unquoted), unquotedlen, "'", 1, "''", 2, &new_length, 1, &replace_count);
 
-	if (!escaped) {
-		return 0;
-	}
+            if (!escaped) {
+                return 0;
+            }
 
-	*quotedlen = spprintf(quoted, 0, "'%s'", escaped);
-	efree(escaped);
-	return 1;
+            *quotedlen = spprintf(quoted, 0, "'%s'", escaped);
+            efree(escaped);
+            return 1;
+            break;
+    }
 }
 /* }}} */
 
